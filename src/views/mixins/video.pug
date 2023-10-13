@@ -1,0 +1,9 @@
+mixin funcName(arg)
+        div 
+            //- a(href="/videos/" + arg.id) #{arg.title}
+            a(href=`/videos/${arg.id}`)= arg.title
+            ul
+                li #{arg.rating}/5
+                li #{arg.comments} comments.
+                li Posted #{arg.createAt}
+                li #{arg.views} views.

@@ -1,0 +1,7 @@
+extends component/base.pug
+
+block content 
+    h4 비디오 제목 변경
+    form(method="POST")
+        input(name="title",placeholder="video Title", value=videoNum.title, required)
+        input(value="save",type="submit")
