@@ -20,7 +20,7 @@ const videoSchema = new mongoose.Schema({
 
 //* middleWare
 //* 스키마.pre()를 통해 데이터모델링.create()의 로직을 아래코드처럼 간추릴 수 있음
-//*     await 몽구스데이터모델링.create({
+//*     await 몽구스비디오모델링.create({
 //*   title,
 //*   description,
 //*   hashtags,   (원래는 hashtags에 아래로직들의 코드들이 post DB controller마다 적용되어있었음.)
@@ -42,4 +42,4 @@ const 스태틱콜백함수 = (hashtags) => {
 videoSchema.static("formatHashtags", 스태틱콜백함수);
 
 //* 첫번째 arg로는 db에 저장될 컬렉션의 이름 , 2번째 arg로는 data의 schema
-export const 몽구스데이터모델링 = mongoose.model("첫번째컬렉션", videoSchema);
+export const 몽구스비디오모델링 = mongoose.model("첫번째컬렉션", videoSchema);
