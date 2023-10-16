@@ -2,5 +2,9 @@ extends component/base.pug
 
 
 block content 
-     h3 #{videoNum.views} #{videoNum.views ===1 ? "view" : "views"}
-     a(href=`${videoNum.id}/edit`) Edit Video &rarr;
+     p=video.description
+     small=video.createdAt
+     br
+     a(href=`${video.id}/edit`) Edit Video &rarr;
+     br
+     a(href=`${video.id}/delete`) delete Video &rarr;

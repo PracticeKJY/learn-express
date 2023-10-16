@@ -7,8 +7,12 @@ html(lang="ko")
     body
         header
             h1=pageTitle
-            button
-                a(href="/") home 
+            a(href="/") 홈으로 가기
+            br
+            a(href="/videos/upload") 업로드하기
+            br
+            a(href="/search") Search
+
         main
             block content
     include footer.pug 

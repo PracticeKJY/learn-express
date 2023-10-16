@@ -1,9 +1,11 @@
 mixin funcName(arg)
         div 
             //- a(href="/videos/" + arg.id) #{arg.title}
-            a(href=`/videos/${arg.id}`)= arg.title
+            h4
+                a(href=`/videos/${arg.id}`)= arg.title
+            p=arg.description
             ul
-                li #{arg.rating}/5
-                li #{arg.comments} comments.
-                li Posted #{arg.createAt}
-                li #{arg.views} views.
+                each hashtag in arg.hashtags
+                    li=hashtag
+            small=arg.createdAt 
+            hr
