@@ -1,6 +1,11 @@
 import express from "express";
-import { edit, see, remove, logout } from "../controllers/user";
-
+import { see } from "../controllers/user";
+import {
+  finishKaKaoLogin,
+  startKaKaoLogin,
+} from "../controllers/user/sosialLogin";
+import { logout } from "../controllers/user/logout";
+import { getEdit, postEdit } from "../controllers/user/edit";
 const userRouter = express.Router();
 
 // :id 가 맨 위에있으면 , /edit, /remove ... 들의 명칭도 다 :id 로 인식해서 see 의 콜백함수가 발동!
@@ -8,8 +13,11 @@ const userRouter = express.Router();
 // => 강의에서는 정규식으로 표현을 함 "/:id(\\d+) 이런식으로!
 
 userRouter.get("/:id(\\d+)", see);
-userRouter.get("/edit", edit);
-userRouter.get("/remove", remove);
+userRouter.route("/edit").get(getEdit).post(postEdit);
 userRouter.get("/logout", logout);
+
+// 소셜로그인
+userRouter.get("/kakao/start", startKaKaoLogin);
+userRouter.get("/kakao/finish", finishKaKaoLogin);
 
 export default userRouter;

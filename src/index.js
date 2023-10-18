@@ -1,11 +1,15 @@
+import "dotenv/config";
 import "./db";
 import "./models/video";
 
 import express from "express";
 import morgan from "morgan";
-import globalRouter from "./router/global";
+import rootRouter from "./router/global";
 import userRouter from "./router/user";
 import videoRouter from "./router/video";
+import MongoStore from "connect-mongo";
+import session from "express-session";
+import { localsMiddleware } from "./middlewares";
 
 const app = express();
 export default app;
@@ -21,7 +25,18 @@ app.use(morgan("dev"));
 //바디 파싱 미들웨어, 사용하면 undifined 였던 req.body가 기가막히게 파씡대서 나옴
 app.use(express.urlencoded({ extended: true }));
 
+// 세션 관련 미들웨어
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
+  })
+);
+app.use(localsMiddleware);
+
 //use router
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
