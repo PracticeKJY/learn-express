@@ -2,9 +2,15 @@ extends component/base.pug
 
 
 block content 
-     p=video.description
-     small=video.createdAt
+     video(src="/" + video.fileUrl, controls) 
+     div
+          p=video.description
+          small=video.createdAt
+     div
+         small Uploaded by 
+            a(href=`/users/${video.owner._id}`)=video.owner.name
      br
-     a(href=`${video.id}/edit`) Edit Video &rarr;
-     br
-     a(href=`${video.id}/delete`) delete Video &rarr;
+     if (loggedInUser && String(video.owner._id) === String(loggedInUser._id))
+          a(href=`${video.id}/edit`) Edit Video &rarr;
+          br
+          a(href=`${video.id}/delete`) Delete Video &rarr;

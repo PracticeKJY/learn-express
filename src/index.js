@@ -26,6 +26,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 
 // 세션 관련 미들웨어
+// 추가적으로 db의 session이라는 컬렉션에 session 정보를 저장함
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
@@ -35,6 +36,10 @@ app.use(
   })
 );
 app.use(localsMiddleware);
+
+// 업로드 된 이미지의 static 추가
+// 이 설정으로 인해 이미지가 깨지지 않음
+app.use("/uploads", express.static("uploads"));
 
 //use router
 app.use("/", rootRouter);

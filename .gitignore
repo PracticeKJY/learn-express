@@ -83,6 +83,11 @@ web_modules/
 .env.production.local
 .env.local
 
+
+# 파일 업로드
+/uploads
+.DS_Store
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

@@ -1,3 +1,4 @@
+import { 몽구스유저모델링 } from "../../models/user";
 import { 몽구스비디오모델링 } from "../../models/video";
 
 export const 메인비디오 = async (req, res) => {
@@ -14,10 +15,16 @@ export const 메인비디오 = async (req, res) => {
 export const watch = async (req, res) => {
   try {
     const id = req.params.id;
-    const 컨텐츠 = await 몽구스비디오모델링.findOne({ _id: id });
+    const 컨텐츠 = await 몽구스비디오모델링
+      .findOne({ _id: id })
+      .populate("owner");
+
     if (!컨텐츠) {
       return res.render("404", { pageTitle: "video is not found!👀" });
     }
+
+    console.log(String(컨텐츠.owner._id), "컨텐츠");
+
     return res.render("watch", {
       pageTitle: 컨텐츠.title,
       video: 컨텐츠,

@@ -10,12 +10,14 @@ const videoSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   // createdAt: { type: Date, required: true, default: Date.now },
+  fileUrl: { type: String, required: true },
   createdAt: { type: String, required: true, default: koreanTime },
   hashtags: [{ type: String }],
   meta: {
     views: { type: Number, default: 0, required: true },
     rating: { type: Number, default: 0, required: true },
   },
+  owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
 });
 
 //* middleWare
@@ -42,4 +44,4 @@ const 스태틱콜백함수 = (hashtags) => {
 videoSchema.static("formatHashtags", 스태틱콜백함수);
 
 //* 첫번째 arg로는 db에 저장될 컬렉션의 이름 , 2번째 arg로는 data의 schema
-export const 몽구스비디오모델링 = mongoose.model("첫번째컬렉션", videoSchema);
+export const 몽구스비디오모델링 = mongoose.model("Video", videoSchema);
