@@ -1,11 +1,8 @@
 mixin funcName(arg)
-        div 
-            //- a(href="/videos/" + arg.id) #{arg.title}
-            h4
-                a(href=`/videos/${arg.id}`)= arg.title
-            p=arg.description
-            ul
-                each hashtag in arg.hashtags
-                    li=hashtag
-            small=arg.createdAt 
-            hr
+    a(href=`/videos/${arg.id}`).video-mixin
+        div.video-mixin__thumb
+        div.video-mixin__data
+            span.video-mixin__title=arg.title
+            div.video-mixin__meta
+                span #{arg.owner.name} • 
+                span #{arg.meta.views} 회

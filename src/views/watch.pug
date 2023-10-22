@@ -1,16 +1,21 @@
 extends component/base.pug
 
 
-block content 
-     video(src="/" + video.fileUrl, controls) 
+block content
+     video#videoContainer(data-id=video._id controls)
+          source(src="/" + video.fileUrl type="video/mp4") 
      div
           p=video.description
           small=video.createdAt
      div
-         small Uploaded by 
-            a(href=`/users/${video.owner._id}`)=video.owner.name
+          small Uploaded by 
+          a(href=`/users/${video.owner._id}`)=video.owner.name
      br
      if (loggedInUser && String(video.owner._id) === String(loggedInUser._id))
           a(href=`${video.id}/edit`) Edit Video &rarr;
           br
           a(href=`${video.id}/delete`) Delete Video &rarr;
+
+
+block scripts
+     script(src="/static/js/videoPlayer.js")

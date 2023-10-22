@@ -2,8 +2,8 @@ extends component/base.pug
 include mixins/video
 
 block content 
-    h2 Wetube에 오신 것을 환영해요! 😁
-    each arg in video
-        +funcName(arg)
-    else
-         div 비디오를 찾을 수 없습니다.
+    div.video-grid
+        each arg in video
+            +funcName(arg)
+        else
+             div 비디오를 찾을 수 없습니다.

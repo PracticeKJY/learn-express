@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import mongoose from "mongoose"
+import bcrypt from "bcrypt"
 
 const userSchema = new mongoose.Schema({
   email: { type: String },
@@ -12,13 +12,12 @@ const userSchema = new mongoose.Schema({
   location: String,
   videos: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
     ref: "Video",
   },
-});
+})
 
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 5);
-});
+  this.password = await bcrypt.hash(this.password, 5)
+})
 
-export const 몽구스유저모델링 = mongoose.model("User", userSchema);
+export const 몽구스유저모델링 = mongoose.model("User", userSchema)
